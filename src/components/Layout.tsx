@@ -1,123 +1,188 @@
 import { Link, useLocation } from "react-router-dom";
-import { motion } from "framer-motion";
-import { FiCloud, FiMenu, FiX } from "react-icons/fi";
-import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { FiCloud, FiMenu, FiX, FiGithub, FiTwitter, FiLinkedin, FiMail } from "react-icons/fi";
+import { useState, useEffect } from "react";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 
   const navLinks = [
     { name: "Home", path: "/" },
-    { name: "VPS Plans", path: "/vps-plans" },
-    { name: "Dashboard", path: "/dashboard" },
+    { name: "VPS Hosting", path: "/vps-plans" },
+    { name: "Pricing", path: "/vps-plans" },
+    { name: "Support", path: "#support" },
   ];
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const isActive = (path: string) => location.pathname === path;
 
   return (
     <div className="min-h-screen bg-mesh">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled
+            ? "border-b border-border/50 bg-background/95 backdrop-blur-xl shadow-lg"
+            : "border-b border-border/30 bg-background/80 backdrop-blur-lg"
+        }`}
+      >
         <div className="container mx-auto px-4">
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2 group">
               <motion.div
                 whileHover={{ rotate: 360 }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.6, ease: "easeInOut" }}
                 className="text-cloud-blue"
               >
                 <FiCloud className="h-8 w-8" />
               </motion.div>
-              <span className="text-xl font-bold text-gradient">
+              <motion.span
+                className="text-xl font-bold text-gradient"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.2 }}
+              >
                 Planning Earth Cloud
-              </span>
+              </motion.span>
             </Link>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">
               {navLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className={`text-sm font-medium transition-colors hover:text-primary ${
-                    isActive(link.path)
-                      ? "text-primary"
-                      : "text-muted-foreground"
-                  }`}
-                >
-                  {link.name}
-                </Link>
+                <motion.div key={link.path} whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
+                  <Link
+                    to={link.path}
+                    className={`relative text-sm font-medium transition-colors ${
+                      isActive(link.path) ? "text-primary" : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    {link.name}
+                    {isActive(link.path) && (
+                      <motion.div
+                        layoutId="activeNavIndicator"
+                        className="absolute -bottom-6 left-0 right-0 h-0.5 bg-gradient-cloud"
+                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      />
+                    )}
+                  </Link>
+                </motion.div>
               ))}
-              <div className="flex items-center gap-3">
-                <Link
-                  to="/login"
-                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  Login
+              <div className="flex items-center gap-3 ml-4">
+                <Link to="/login">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-4 py-2"
+                  >
+                    Login
+                  </motion.button>
                 </Link>
-                <Link
-                  to="/register"
-                  className="px-4 py-2 text-sm font-semibold rounded-lg bg-gradient-cloud text-primary-foreground hover:opacity-90 transition-opacity"
-                >
-                  Get Started
+                <Link to="/register">
+                  <motion.button
+                    whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(59, 130, 246, 0.4)" }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-6 py-2.5 text-sm font-semibold rounded-full bg-gradient-cloud text-primary-foreground transition-shadow"
+                  >
+                    Get Started
+                  </motion.button>
                 </Link>
               </div>
             </div>
 
             {/* Mobile Menu Button */}
-            <button
+            <motion.button
+              whileTap={{ scale: 0.9 }}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="md:hidden text-foreground"
+              aria-label="Toggle menu"
             >
-              {mobileMenuOpen ? (
-                <FiX className="h-6 w-6" />
-              ) : (
-                <FiMenu className="h-6 w-6" />
-              )}
-            </button>
+              <AnimatePresence mode="wait">
+                {mobileMenuOpen ? (
+                  <motion.div
+                    key="close"
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <FiX className="h-6 w-6" />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="menu"
+                    initial={{ rotate: 90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <FiMenu className="h-6 w-6" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.button>
           </div>
 
           {/* Mobile Menu */}
-          {mobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="md:hidden py-4 space-y-3"
-            >
-              {navLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`block px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
-                    isActive(link.path)
-                      ? "bg-primary/10 text-primary"
-                      : "text-muted-foreground hover:bg-muted"
-                  }`}
-                >
-                  {link.name}
-                </Link>
-              ))}
-              <div className="flex flex-col gap-2 pt-2">
-                <Link
-                  to="/login"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="px-3 py-2 text-sm font-medium text-center rounded-lg border border-border hover:bg-muted transition-colors"
-                >
-                  Login
-                </Link>
-                <Link
-                  to="/register"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="px-3 py-2 text-sm font-semibold text-center rounded-lg bg-gradient-cloud text-primary-foreground"
-                >
-                  Get Started
-                </Link>
-              </div>
-            </motion.div>
-          )}
+          <AnimatePresence>
+            {mobileMenuOpen && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="md:hidden overflow-hidden"
+              >
+                <div className="py-4 space-y-2">
+                  {navLinks.map((link, index) => (
+                    <motion.div
+                      key={link.path}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                    >
+                      <Link
+                        to={link.path}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className={`block px-4 py-3 text-sm font-medium rounded-xl transition-all ${
+                          isActive(link.path)
+                            ? "bg-gradient-cloud/10 text-primary border border-primary/20"
+                            : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                        }`}
+                      >
+                        {link.name}
+                      </Link>
+                    </motion.div>
+                  ))}
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: navLinks.length * 0.1 }}
+                    className="flex flex-col gap-2 pt-4 border-t border-border/50"
+                  >
+                    <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
+                      <button className="w-full px-4 py-3 text-sm font-medium text-center rounded-xl border border-border hover:bg-muted transition-colors">
+                        Login
+                      </button>
+                    </Link>
+                    <Link to="/register" onClick={() => setMobileMenuOpen(false)}>
+                      <button className="w-full px-4 py-3 text-sm font-semibold text-center rounded-full bg-gradient-cloud text-primary-foreground glow">
+                        Get Started
+                      </button>
+                    </Link>
+                  </motion.div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </nav>
 
@@ -125,66 +190,145 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <main className="pt-16">{children}</main>
 
       {/* Footer */}
-      <footer className="border-t border-border/50 bg-background/50 backdrop-blur-xl mt-20">
-        <div className="container mx-auto px-4 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <footer className="relative border-t border-border/50 bg-gradient-to-b from-background via-background to-card/30 backdrop-blur-xl mt-20 overflow-hidden">
+        {/* Gradient Background Effect */}
+        <div className="absolute inset-0 bg-gradient-to-br from-cloud-blue/5 via-cloud-indigo/5 to-cloud-purple/5 pointer-events-none" />
+        
+        <div className="container mx-auto px-4 py-16 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+            {/* Company Section */}
             <div className="space-y-4">
-              <div className="flex items-center gap-2">
-                <FiCloud className="h-6 w-6 text-cloud-blue" />
-                <span className="font-bold text-gradient">Planning Earth Cloud</span>
+              <div className="flex items-center gap-2 mb-4">
+                <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.6 }}>
+                  <FiCloud className="h-8 w-8 text-cloud-blue" />
+                </motion.div>
+                <span className="font-bold text-lg text-gradient">Planning Earth Cloud</span>
               </div>
-              <p className="text-sm text-muted-foreground">
-                Enterprise-grade VPS hosting with unmatched performance.
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Enterprise-grade VPS hosting with unmatched performance and reliability. Scale with confidence.
               </p>
+              {/* Social Icons */}
+              <div className="flex items-center gap-3 pt-4">
+                {[
+                  { icon: FiGithub, href: "#", label: "GitHub" },
+                  { icon: FiTwitter, href: "#", label: "Twitter" },
+                  { icon: FiLinkedin, href: "#", label: "LinkedIn" },
+                  { icon: FiMail, href: "#", label: "Email" },
+                ].map((social, index) => (
+                  <motion.a
+                    key={index}
+                    href={social.href}
+                    aria-label={social.label}
+                    whileHover={{ y: -4, scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="p-2.5 rounded-lg bg-muted/50 hover:bg-gradient-cloud/10 border border-border/50 hover:border-primary/30 transition-all group"
+                  >
+                    <social.icon className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors glow-on-hover" />
+                  </motion.a>
+                ))}
+              </div>
             </div>
+
+            {/* Hosting Section */}
             <div>
-              <h3 className="font-semibold mb-4">Product</h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>
-                  <Link to="/vps-plans" className="hover:text-primary transition-colors">
-                    VPS Plans
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/configure-vps" className="hover:text-primary transition-colors">
-                    Configure VPS
-                  </Link>
-                </li>
+              <h3 className="font-bold text-base mb-6 text-foreground">Hosting</h3>
+              <ul className="space-y-3">
+                {[
+                  { name: "VPS Plans", to: "/vps-plans" },
+                  { name: "Configure VPS", to: "/configure-vps" },
+                  { name: "Pricing", to: "/vps-plans" },
+                  { name: "Data Centers", to: "#" },
+                ].map((link, index) => (
+                  <motion.li
+                    key={index}
+                    whileHover={{ x: 4 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Link
+                      to={link.to}
+                      className="text-sm text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-2 group"
+                    >
+                      <span className="w-1 h-1 rounded-full bg-muted-foreground group-hover:bg-primary transition-colors" />
+                      {link.name}
+                    </Link>
+                  </motion.li>
+                ))}
               </ul>
             </div>
+
+            {/* Resources Section */}
             <div>
-              <h3 className="font-semibold mb-4">Company</h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>
-                  <a href="#" className="hover:text-primary transition-colors">
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-primary transition-colors">
-                    Contact
-                  </a>
-                </li>
+              <h3 className="font-bold text-base mb-6 text-foreground">Resources</h3>
+              <ul className="space-y-3">
+                {[
+                  { name: "Documentation", href: "#" },
+                  { name: "API Reference", href: "#" },
+                  { name: "Support Center", href: "#" },
+                  { name: "Status Page", href: "#" },
+                ].map((link, index) => (
+                  <motion.li
+                    key={index}
+                    whileHover={{ x: 4 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <a
+                      href={link.href}
+                      className="text-sm text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-2 group"
+                    >
+                      <span className="w-1 h-1 rounded-full bg-muted-foreground group-hover:bg-primary transition-colors" />
+                      {link.name}
+                    </a>
+                  </motion.li>
+                ))}
               </ul>
             </div>
+
+            {/* Legal Section */}
             <div>
-              <h3 className="font-semibold mb-4">Legal</h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>
-                  <a href="#" className="hover:text-primary transition-colors">
-                    Privacy
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-primary transition-colors">
-                    Terms
-                  </a>
-                </li>
+              <h3 className="font-bold text-base mb-6 text-foreground">Legal</h3>
+              <ul className="space-y-3">
+                {[
+                  { name: "Privacy Policy", href: "#" },
+                  { name: "Terms of Service", href: "#" },
+                  { name: "Cookie Policy", href: "#" },
+                  { name: "GDPR", href: "#" },
+                ].map((link, index) => (
+                  <motion.li
+                    key={index}
+                    whileHover={{ x: 4 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <a
+                      href={link.href}
+                      className="text-sm text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-2 group"
+                    >
+                      <span className="w-1 h-1 rounded-full bg-muted-foreground group-hover:bg-primary transition-colors" />
+                      {link.name}
+                    </a>
+                  </motion.li>
+                ))}
               </ul>
             </div>
           </div>
-          <div className="mt-12 pt-8 border-t border-border/50 text-center text-sm text-muted-foreground">
-            <p>&copy; 2024 Planning Earth Cloud. All rights reserved.</p>
+
+          {/* Bottom Bar */}
+          <div className="pt-8 border-t border-border/50">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+              <p className="text-sm text-muted-foreground">
+                &copy; {new Date().getFullYear()} Planning Earth Cloud. All rights reserved.
+              </p>
+              <div className="flex items-center gap-6 text-sm text-muted-foreground">
+                <a href="#" className="hover:text-primary transition-colors">
+                  Security
+                </a>
+                <a href="#" className="hover:text-primary transition-colors">
+                  Trust Center
+                </a>
+                <a href="#" className="hover:text-primary transition-colors">
+                  Compliance
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </footer>
