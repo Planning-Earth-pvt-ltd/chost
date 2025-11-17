@@ -1,142 +1,265 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { FiCheck } from "react-icons/fi";
+import { FiCheck, FiCpu, FiHardDrive, FiActivity } from "react-icons/fi";
 
 const VPSPlans = () => {
+  const [billingCycle, setBillingCycle] = useState<"monthly" | "6months" | "yearly">("monthly");
+
   const plans = [
     {
-      name: "Starter",
-      price: "9.99",
-      description: "Perfect for small projects and testing",
+      name: "PE VPS 1",
+      cpu: "1 vCPU",
+      ram: "2 GB RAM",
+      storage: "50 GB NVMe SSD",
+      bandwidth: "1 TB Bandwidth",
+      pricing: {
+        monthly: 499,
+        "6months": 449,
+        yearly: 399,
+      },
       features: [
-        "1 vCPU Core",
-        "2 GB RAM",
-        "25 GB NVMe SSD",
-        "1 TB Bandwidth",
+        "Full Root Access",
+        "Free DDoS Protection",
         "99.9% Uptime SLA",
+        "24/7 Support",
+        "Automated Backups",
       ],
     },
     {
-      name: "Professional",
-      price: "24.99",
-      description: "Ideal for growing applications",
-      features: [
-        "2 vCPU Cores",
-        "4 GB RAM",
-        "80 GB NVMe SSD",
-        "3 TB Bandwidth",
-        "99.95% Uptime SLA",
-        "Free SSL Certificate",
-      ],
+      name: "PE VPS 2",
+      cpu: "2 vCPU",
+      ram: "4 GB RAM",
+      storage: "100 GB NVMe SSD",
+      bandwidth: "2 TB Bandwidth",
+      pricing: {
+        monthly: 999,
+        "6months": 899,
+        yearly: 799,
+      },
       popular: true,
-    },
-    {
-      name: "Business",
-      price: "49.99",
-      description: "For high-traffic applications",
       features: [
-        "4 vCPU Cores",
-        "8 GB RAM",
-        "160 GB NVMe SSD",
-        "5 TB Bandwidth",
-        "99.99% Uptime SLA",
-        "Free SSL Certificate",
+        "Full Root Access",
+        "Advanced DDoS Protection",
+        "99.95% Uptime SLA",
         "Priority Support",
+        "Automated Backups",
+        "Free SSL Certificate",
       ],
     },
     {
-      name: "Enterprise",
-      price: "99.99",
-      description: "Maximum performance and reliability",
+      name: "PE VPS 4",
+      cpu: "4 vCPU",
+      ram: "8 GB RAM",
+      storage: "200 GB NVMe SSD",
+      bandwidth: "4 TB Bandwidth",
+      pricing: {
+        monthly: 1999,
+        "6months": 1799,
+        yearly: 1599,
+      },
       features: [
-        "8 vCPU Cores",
-        "16 GB RAM",
-        "320 GB NVMe SSD",
-        "10 TB Bandwidth",
+        "Full Root Access",
+        "Enterprise DDoS Protection",
         "99.99% Uptime SLA",
-        "Free SSL Certificate",
         "24/7 Priority Support",
+        "Automated Backups",
+        "Free SSL Certificate",
         "Dedicated IP",
+        "Custom Firewall",
       ],
     },
   ];
 
+  const getPrice = (plan: typeof plans[0]) => {
+    return plan.pricing[billingCycle];
+  };
+
+  const getSavingsPercent = (cycle: typeof billingCycle) => {
+    if (cycle === "6months") return "10";
+    if (cycle === "yearly") return "20";
+    return "0";
+  };
+
   return (
-    <div className="py-20 px-4">
+    <div className="py-20 px-4 min-h-screen">
       <div className="container mx-auto">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            VPS <span className="text-gradient">Pricing Plans</span>
+            Choose Your <span className="text-gradient">VPS Plan</span>
           </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Choose the perfect plan for your needs. All plans include DDoS protection and automated backups.
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
+            Enterprise-grade virtual private servers with guaranteed resources and performance
           </p>
+
+          {/* Billing Toggle */}
+          <div className="inline-flex items-center gap-2 p-2 rounded-xl bg-muted/30 backdrop-blur-sm">
+            {[
+              { value: "monthly" as const, label: "Monthly" },
+              { value: "6months" as const, label: "6 Months" },
+              { value: "yearly" as const, label: "Yearly" },
+            ].map((option) => (
+              <button
+                key={option.value}
+                onClick={() => setBillingCycle(option.value)}
+                className={`relative px-6 py-3 rounded-lg font-medium transition-all ${
+                  billingCycle === option.value
+                    ? "bg-gradient-cloud text-primary-foreground"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {option.label}
+                {option.value !== "monthly" && (
+                  <span className="absolute -top-2 -right-2 px-2 py-0.5 text-xs font-bold rounded-full bg-accent text-accent-foreground">
+                    Save {getSavingsPercent(option.value)}%
+                  </span>
+                )}
+              </button>
+            ))}
+          </div>
         </motion.div>
 
         {/* Plans Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {plans.map((plan, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -8 }}
-              className={`relative card-glass rounded-2xl p-8 shadow-card ${
-                plan.popular ? "ring-2 ring-primary" : ""
-              }`}
+              whileHover={{ y: -10, scale: 1.02 }}
+              className="relative group"
             >
-              {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <span className="px-4 py-1 text-xs font-semibold rounded-full bg-gradient-cloud text-primary-foreground">
+              {/* Gradient Border Effect */}
+              <div className="absolute inset-0 bg-gradient-cloud rounded-2xl opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300" />
+              
+              <div
+                className={`relative card-glass rounded-2xl p-8 shadow-card h-full flex flex-col ${
+                  plan.popular ? "ring-2 ring-primary" : ""
+                }`}
+              >
+                {plan.popular && (
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-cloud text-primary-foreground text-sm font-semibold glow">
                     Most Popular
-                  </span>
+                  </div>
+                )}
+
+                {/* Plan Name */}
+                <div className="mb-6">
+                  <h3 className="text-3xl font-bold mb-2">{plan.name}</h3>
                 </div>
-              )}
 
-              <div className="mb-6">
-                <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
-                <p className="text-sm text-muted-foreground">{plan.description}</p>
-              </div>
-
-              <div className="mb-6">
-                <div className="flex items-baseline">
-                  <span className="text-5xl font-bold text-gradient">${plan.price}</span>
-                  <span className="text-muted-foreground ml-2">/month</span>
+                {/* Pricing */}
+                <div className="mb-8">
+                  <div className="flex items-baseline">
+                    <span className="text-5xl font-bold text-gradient">
+                      ₹{getPrice(plan).toLocaleString("en-IN")}
+                    </span>
+                    <span className="text-muted-foreground ml-2">/mo</span>
+                  </div>
+                  {billingCycle !== "monthly" && (
+                    <p className="text-sm text-muted-foreground mt-2">
+                      Billed {billingCycle === "6months" ? "semi-annually" : "annually"}
+                    </p>
+                  )}
                 </div>
+
+                {/* Specs */}
+                <div className="space-y-4 mb-8 pb-8 border-b border-border">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-lg bg-primary/10">
+                      <FiCpu className="h-5 w-5 text-primary" />
+                    </div>
+                    <div>
+                      <div className="text-sm text-muted-foreground">Processor</div>
+                      <div className="font-semibold">{plan.cpu}</div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-lg bg-primary/10">
+                      <FiActivity className="h-5 w-5 text-primary" />
+                    </div>
+                    <div>
+                      <div className="text-sm text-muted-foreground">Memory</div>
+                      <div className="font-semibold">{plan.ram}</div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-lg bg-primary/10">
+                      <FiHardDrive className="h-5 w-5 text-primary" />
+                    </div>
+                    <div>
+                      <div className="text-sm text-muted-foreground">Storage</div>
+                      <div className="font-semibold">{plan.storage}</div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-lg bg-primary/10">
+                      <FiActivity className="h-5 w-5 text-primary" />
+                    </div>
+                    <div>
+                      <div className="text-sm text-muted-foreground">Bandwidth</div>
+                      <div className="font-semibold">{plan.bandwidth}</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Features */}
+                <ul className="space-y-3 mb-8 flex-grow">
+                  {plan.features.map((feature, idx) => (
+                    <li key={idx} className="flex items-start gap-3">
+                      <FiCheck className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
+                      <span className="text-sm text-muted-foreground">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* CTA Button */}
+                <Link to="/configure-vps" className="block">
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className={`w-full px-6 py-4 rounded-xl font-semibold transition-all ${
+                      plan.popular
+                        ? "bg-gradient-cloud text-primary-foreground glow"
+                        : "border-2 border-border hover:bg-muted hover:border-primary"
+                    }`}
+                  >
+                    Configure Plan
+                  </motion.button>
+                </Link>
               </div>
-
-              <ul className="space-y-3 mb-8">
-                {plan.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-start gap-3">
-                    <FiCheck className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
-                    <span className="text-sm text-muted-foreground">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <Link to="/configure-vps" state={{ selectedPlan: plan.name }}>
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className={`w-full py-3 px-6 rounded-xl font-semibold transition-all ${
-                    plan.popular
-                      ? "bg-gradient-cloud text-primary-foreground glow"
-                      : "border-2 border-border hover:bg-muted"
-                  }`}
-                >
-                  Get Started
-                </motion.button>
-              </Link>
             </motion.div>
           ))}
         </div>
+
+        {/* Additional Info */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mt-16 text-center"
+        >
+          <p className="text-muted-foreground mb-4">
+            All plans include: Free setup, instant activation, and 30-day money-back guarantee
+          </p>
+          <div className="flex flex-wrap justify-center gap-8 text-sm text-muted-foreground/60">
+            <span>✓ NVMe SSD Storage</span>
+            <span>✓ DDoS Protection</span>
+            <span>✓ Free Backups</span>
+            <span>✓ 24/7 Support</span>
+            <span>✓ Root Access</span>
+          </div>
+        </motion.div>
       </div>
     </div>
   );
