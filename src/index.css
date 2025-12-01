@@ -2,67 +2,54 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Planning Earth Cloud Design System */
+/* Planning Earth Cloud Design System - Light Theme */
 
 @layer base {
   :root {
-    --background: 222 47% 11%;
-    --foreground: 210 40% 98%;
+    --background: 0 0% 100%;
+    --foreground: 220 14% 10%;
 
-    --card: 222 47% 15%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 14% 10%;
 
-    --popover: 222 47% 15%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 14% 10%;
 
-    --primary: 217 91% 60%;
-    --primary-foreground: 222 47% 11%;
+    --primary: 221 83% 53%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 263 70% 64%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 14% 10%;
 
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
 
-    --accent: 189 94% 43%;
-    --accent-foreground: 222 47% 11%;
+    --accent: 220 14% 96%;
+    --accent-foreground: 220 14% 10%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 217 33% 20%;
-    --input: 217 33% 20%;
-    --ring: 217 91% 60%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 221 83% 53%;
 
     --radius: 0.75rem;
     
-    --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #6366f1 25%, #a855f7 50%, #06b6d4 100%);
-    --gradient-mesh: radial-gradient(at 40% 20%, rgba(59, 130, 246, 0.3) 0px, transparent 50%),
-                     radial-gradient(at 80% 0%, rgba(99, 102, 241, 0.25) 0px, transparent 50%),
-                     radial-gradient(at 0% 50%, rgba(168, 85, 247, 0.2) 0px, transparent 50%),
-                     radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.25) 0px, transparent 50%);
-    
-    --shadow-glow: 0 0 40px rgba(59, 130, 246, 0.3);
-    --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --shadow-soft: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+    --shadow-elevated: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+    --transition-smooth: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
     --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
+    --sidebar-foreground: 220 14% 10%;
+    --sidebar-primary: 221 83% 53%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 14% 96%;
+    --sidebar-accent-foreground: 220 14% 10%;
     --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 221 83% 53%;
   }
-
 }
 
 @layer base {
@@ -81,41 +68,34 @@
 }
 
 @layer utilities {
-  .text-gradient {
-    @apply bg-gradient-to-r from-cloud-blue via-cloud-indigo to-cloud-purple bg-clip-text text-transparent;
+  .text-primary-accent {
+    @apply text-primary font-semibold;
   }
   
-  .text-gradient-cyan {
-    @apply bg-gradient-to-r from-cloud-purple via-cloud-indigo to-cloud-cyan bg-clip-text text-transparent;
+  .card-modern {
+    @apply bg-card border border-border rounded-2xl;
+    box-shadow: var(--shadow-card);
   }
   
-  .bg-gradient-cloud {
-    background: var(--gradient-primary);
+  .card-elevated {
+    @apply bg-card border border-border rounded-2xl;
+    box-shadow: var(--shadow-elevated);
   }
   
-  .bg-mesh {
-    background-color: hsl(var(--background));
-    background-image: var(--gradient-mesh);
-  }
-  
-  .card-glass {
-    @apply bg-card/50 backdrop-blur-xl border border-border/50;
-  }
-  
-  .glow {
-    box-shadow: var(--shadow-glow);
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
   }
   
   .shadow-card {
     box-shadow: var(--shadow-card);
   }
   
-  .glow-on-hover {
-    transition: filter 0.3s ease;
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
   }
   
-  .glow-on-hover:hover {
-    filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.6));
+  .input-modern {
+    @apply bg-secondary/50 border border-border rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all;
   }
 }
 
@@ -131,19 +111,10 @@
 @keyframes slide-up {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@keyframes gradient {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
   }
 }

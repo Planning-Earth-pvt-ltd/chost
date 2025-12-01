@@ -16,32 +16,31 @@ const Login = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate login
     navigate("/dashboard");
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center py-20 px-4 bg-gradient-to-br from-background via-background to-primary/5">
+    <div className="min-h-screen flex items-center justify-center py-20 px-4 bg-secondary/30">
       <div className="container mx-auto max-w-md">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
         >
           <div className="text-center mb-8">
             <motion.h1 
-              className="text-5xl font-bold mb-4"
-              initial={{ opacity: 0, y: 20 }}
+              className="text-4xl font-bold text-foreground mb-3"
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
+              transition={{ delay: 0.1, duration: 0.4 }}
             >
-              Welcome <span className="text-gradient">Back</span>
+              Welcome Back
             </motion.h1>
             <motion.p 
-              className="text-xl text-muted-foreground"
+              className="text-muted-foreground"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
+              transition={{ delay: 0.2, duration: 0.4 }}
             >
               Sign in to manage your VPS instances
             </motion.p>
@@ -49,40 +48,40 @@ const Login = () => {
 
           <motion.form 
             onSubmit={handleSubmit} 
-            className="card-glass rounded-2xl p-8 space-y-6"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
+            className="card-elevated p-8 space-y-5"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.4 }}
           >
             {/* Social Login Buttons */}
             <div className="space-y-3">
               <motion.button
                 type="button"
-                whileHover={{ scale: 1.02, y: -2 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl bg-card border border-border hover:bg-accent transition-colors"
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.99 }}
+                className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl bg-background border border-border hover:bg-secondary/50 transition-colors"
               >
                 <FcGoogle className="h-5 w-5" />
-                <span className="font-medium">Continue with Google</span>
+                <span className="font-medium text-foreground">Continue with Google</span>
               </motion.button>
               <motion.button
                 type="button"
-                whileHover={{ scale: 1.02, y: -2 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl bg-card border border-border hover:bg-accent transition-colors"
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.99 }}
+                className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl bg-background border border-border hover:bg-secondary/50 transition-colors"
               >
-                <FaGithub className="h-5 w-5" />
-                <span className="font-medium">Continue with GitHub</span>
+                <FaGithub className="h-5 w-5 text-foreground" />
+                <span className="font-medium text-foreground">Continue with GitHub</span>
               </motion.button>
             </div>
 
             {/* Divider */}
-            <div className="relative">
+            <div className="relative py-2">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-border"></div>
               </div>
               <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-card px-2 text-muted-foreground">Or continue with email</span>
+                <span className="bg-card px-3 text-muted-foreground">Or continue with email</span>
               </div>
             </div>
 
@@ -95,7 +94,7 @@ const Login = () => {
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 onFocus={() => setFocusedField("email")}
                 onBlur={() => setFocusedField(null)}
-                className="w-full px-4 py-3 pl-12 rounded-xl bg-muted border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary peer placeholder-transparent"
+                className="w-full px-4 py-3.5 pl-12 rounded-xl bg-secondary/50 border border-border text-foreground focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all placeholder-transparent"
                 placeholder="Email Address"
                 required
               />
@@ -103,8 +102,8 @@ const Login = () => {
                 htmlFor="email"
                 className={`absolute left-12 transition-all duration-200 pointer-events-none ${
                   formData.email || focusedField === "email"
-                    ? "-top-2 text-xs bg-muted px-1 text-primary"
-                    : "top-3 text-sm text-muted-foreground"
+                    ? "-top-2.5 text-xs bg-card px-2 text-primary font-medium"
+                    : "top-3.5 text-sm text-muted-foreground"
                 }`}
               >
                 Email Address
@@ -121,7 +120,7 @@ const Login = () => {
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 onFocus={() => setFocusedField("password")}
                 onBlur={() => setFocusedField(null)}
-                className="w-full px-4 py-3 pl-12 pr-12 rounded-xl bg-muted border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary peer placeholder-transparent"
+                className="w-full px-4 py-3.5 pl-12 pr-12 rounded-xl bg-secondary/50 border border-border text-foreground focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all placeholder-transparent"
                 placeholder="Password"
                 required
               />
@@ -129,8 +128,8 @@ const Login = () => {
                 htmlFor="password"
                 className={`absolute left-12 transition-all duration-200 pointer-events-none ${
                   formData.password || focusedField === "password"
-                    ? "-top-2 text-xs bg-muted px-1 text-primary"
-                    : "top-3 text-sm text-muted-foreground"
+                    ? "-top-2.5 text-xs bg-card px-2 text-primary font-medium"
+                    : "top-3.5 text-sm text-muted-foreground"
                 }`}
               >
                 Password
@@ -147,23 +146,23 @@ const Login = () => {
 
             {/* Forgot Password */}
             <div className="flex justify-end">
-              <a href="#" className="text-sm text-primary hover:underline">
+              <a href="#" className="text-sm text-primary hover:underline font-medium">
                 Forgot password?
               </a>
             </div>
 
             {/* Submit Button */}
             <motion.button
-              whileHover={{ scale: 1.02, boxShadow: "0 0 30px rgba(99, 102, 241, 0.4)" }}
-              whileTap={{ scale: 0.98 }}
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.99 }}
               type="submit"
-              className="w-full py-3 text-lg font-semibold rounded-xl bg-gradient-cloud text-primary-foreground glow"
+              className="w-full py-3.5 text-base font-semibold rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 transition-colors shadow-soft"
             >
               Sign In
             </motion.button>
 
             {/* Register Link */}
-            <p className="text-center text-sm text-muted-foreground">
+            <p className="text-center text-sm text-muted-foreground pt-2">
               Don't have an account?{" "}
               <Link to="/register" className="text-primary hover:underline font-medium">
                 Create one now
