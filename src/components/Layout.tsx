@@ -26,13 +26,13 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <div className="min-h-screen bg-mesh">
+    <div className="min-h-screen bg-background">
       {/* Navigation */}
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? "border-b border-border/50 bg-background/95 backdrop-blur-xl shadow-lg"
-            : "border-b border-border/30 bg-background/80 backdrop-blur-lg"
+            ? "border-b border-border bg-background/95 backdrop-blur-sm shadow-soft"
+            : "border-b border-transparent bg-background/80 backdrop-blur-sm"
         }`}
       >
         <div className="container mx-auto px-4">
@@ -42,12 +42,12 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               <motion.div
                 whileHover={{ rotate: 360 }}
                 transition={{ duration: 0.6, ease: "easeInOut" }}
-                className="text-cloud-blue"
+                className="text-primary"
               >
                 <FiCloud className="h-8 w-8" />
               </motion.div>
               <motion.span
-                className="text-xl font-bold text-gradient"
+                className="text-xl font-bold text-foreground"
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.2 }}
               >
@@ -58,7 +58,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">
               {navLinks.map((link) => (
-                <motion.div key={link.path} whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
+                <motion.div key={link.path + link.name} whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
                   <Link
                     to={link.path}
                     className={`relative text-sm font-medium transition-colors ${
@@ -69,7 +69,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                     {isActive(link.path) && (
                       <motion.div
                         layoutId="activeNavIndicator"
-                        className="absolute -bottom-6 left-0 right-0 h-0.5 bg-gradient-cloud"
+                        className="absolute -bottom-6 left-0 right-0 h-0.5 bg-primary"
                         transition={{ type: "spring", stiffness: 380, damping: 30 }}
                       />
                     )}
@@ -79,8 +79,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               <div className="flex items-center gap-3 ml-4">
                 <Link to="/login">
                   <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                     className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-4 py-2"
                   >
                     Login
@@ -88,9 +88,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 </Link>
                 <Link to="/register">
                   <motion.button
-                    whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(59, 130, 246, 0.4)" }}
-                    whileTap={{ scale: 0.95 }}
-                    className="px-6 py-2.5 text-sm font-semibold rounded-full bg-gradient-cloud text-primary-foreground transition-shadow"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="px-6 py-2.5 text-sm font-semibold rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
                   >
                     Get Started
                   </motion.button>
@@ -144,7 +144,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 <div className="py-4 space-y-2">
                   {navLinks.map((link, index) => (
                     <motion.div
-                      key={link.path}
+                      key={link.path + link.name}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.1 }}
@@ -154,8 +154,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                         onClick={() => setMobileMenuOpen(false)}
                         className={`block px-4 py-3 text-sm font-medium rounded-xl transition-all ${
                           isActive(link.path)
-                            ? "bg-gradient-cloud/10 text-primary border border-primary/20"
-                            : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                            ? "bg-primary/10 text-primary border border-primary/20"
+                            : "text-muted-foreground hover:bg-secondary hover:text-foreground"
                         }`}
                       >
                         {link.name}
@@ -166,15 +166,15 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: navLinks.length * 0.1 }}
-                    className="flex flex-col gap-2 pt-4 border-t border-border/50"
+                    className="flex flex-col gap-2 pt-4 border-t border-border"
                   >
                     <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
-                      <button className="w-full px-4 py-3 text-sm font-medium text-center rounded-xl border border-border hover:bg-muted transition-colors">
+                      <button className="w-full px-4 py-3 text-sm font-medium text-center rounded-xl border border-border hover:bg-secondary transition-colors">
                         Login
                       </button>
                     </Link>
                     <Link to="/register" onClick={() => setMobileMenuOpen(false)}>
-                      <button className="w-full px-4 py-3 text-sm font-semibold text-center rounded-full bg-gradient-cloud text-primary-foreground glow">
+                      <button className="w-full px-4 py-3 text-sm font-semibold text-center rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors">
                         Get Started
                       </button>
                     </Link>
@@ -190,19 +190,14 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <main className="pt-16">{children}</main>
 
       {/* Footer */}
-      <footer className="relative border-t border-border/50 bg-gradient-to-b from-background via-background to-card/30 backdrop-blur-xl mt-20 overflow-hidden">
-        {/* Gradient Background Effect */}
-        <div className="absolute inset-0 bg-gradient-to-br from-cloud-blue/5 via-cloud-indigo/5 to-cloud-purple/5 pointer-events-none" />
-        
-        <div className="container mx-auto px-4 py-16 relative z-10">
+      <footer className="border-t border-border bg-secondary/30 mt-20">
+        <div className="container mx-auto px-4 py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
             {/* Company Section */}
             <div className="space-y-4">
               <div className="flex items-center gap-2 mb-4">
-                <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.6 }}>
-                  <FiCloud className="h-8 w-8 text-cloud-blue" />
-                </motion.div>
-                <span className="font-bold text-lg text-gradient">Planning Earth Cloud</span>
+                <FiCloud className="h-8 w-8 text-primary" />
+                <span className="font-bold text-lg text-foreground">Planning Earth Cloud</span>
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Enterprise-grade VPS hosting with unmatched performance and reliability. Scale with confidence.
@@ -221,9 +216,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                     aria-label={social.label}
                     whileHover={{ y: -4, scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
-                    className="p-2.5 rounded-lg bg-muted/50 hover:bg-gradient-cloud/10 border border-border/50 hover:border-primary/30 transition-all group"
+                    className="p-2.5 rounded-lg bg-background hover:bg-primary/10 border border-border hover:border-primary/30 transition-all group"
                   >
-                    <social.icon className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors glow-on-hover" />
+                    <social.icon className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
                   </motion.a>
                 ))}
               </div>
@@ -312,7 +307,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           </div>
 
           {/* Bottom Bar */}
-          <div className="pt-8 border-t border-border/50">
+          <div className="pt-8 border-t border-border">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <p className="text-sm text-muted-foreground">
                 &copy; {new Date().getFullYear()} Planning Earth Cloud. All rights reserved.

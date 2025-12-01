@@ -60,9 +60,7 @@ const Home = () => {
   return (
     <div className="overflow-hidden">
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center justify-center px-4">
-        <div className="absolute inset-0 bg-gradient-to-b from-cloud-blue/10 via-cloud-indigo/5 to-transparent" />
-        
+      <section className="relative min-h-[90vh] flex items-center justify-center px-4 bg-secondary/20">
         <div className="container mx-auto relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
@@ -75,17 +73,17 @@ const Home = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="inline-block mb-6 px-4 py-2 rounded-full bg-gradient-cloud/10 border border-primary/20"
+                className="inline-block mb-6 px-4 py-2 rounded-full bg-primary/10 border border-primary/20"
               >
-                <span className="text-sm font-medium text-gradient">
+                <span className="text-sm font-medium text-primary">
                   🇮🇳 Hosted in India
                 </span>
               </motion.div>
 
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight text-foreground">
                 Enterprise-Grade
                 <br />
-                <span className="text-gradient">Cloud Hosting in India</span>
+                <span className="text-primary">Cloud Hosting</span>
               </h1>
 
               <p className="text-xl md:text-2xl text-muted-foreground mb-10 max-w-2xl">
@@ -95,18 +93,18 @@ const Home = () => {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link to="/vps-plans">
                   <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="px-8 py-4 text-lg font-semibold rounded-xl bg-gradient-cloud text-primary-foreground glow"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="px-8 py-4 text-lg font-semibold rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 transition-colors shadow-soft"
                   >
                     View VPS Plans
                   </motion.button>
                 </Link>
                 <Link to="/register">
                   <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="px-8 py-4 text-lg font-semibold rounded-xl border-2 border-border hover:bg-muted transition-colors"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="px-8 py-4 text-lg font-semibold rounded-xl border-2 border-border hover:bg-secondary transition-colors"
                   >
                     Create Account
                   </motion.button>
@@ -129,7 +127,7 @@ const Home = () => {
                     animate={{ 
                       opacity: 1, 
                       y: 0,
-                      rotate: [0, i === 1 ? 5 : -5, 0],
+                      rotate: [0, i === 1 ? 3 : -3, 0],
                     }}
                     transition={{ 
                       duration: 0.6, 
@@ -140,14 +138,14 @@ const Home = () => {
                         ease: "easeInOut",
                       }
                     }}
-                    className={`absolute card-glass p-8 rounded-2xl shadow-card ${
+                    className={`absolute card-elevated p-8 ${
                       i === 0 ? 'top-0 right-0 w-64' : 
                       i === 1 ? 'top-32 right-20 w-72 z-10' : 
                       'top-64 right-8 w-64'
                     }`}
                   >
                     <div className="flex items-center gap-4 mb-4">
-                      <div className="p-3 rounded-xl bg-gradient-cloud/10">
+                      <div className="p-3 rounded-xl bg-primary/10">
                         <FiServer className="h-6 w-6 text-primary" />
                       </div>
                       <div>
@@ -178,7 +176,7 @@ const Home = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-24 px-4">
+      <section className="py-24 px-4 bg-background">
         <div className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -187,8 +185,8 @@ const Home = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Powerful Features for <span className="text-gradient">Your Success</span>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
+              Powerful Features for <span className="text-primary">Your Success</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Everything you need to run high-performance applications
@@ -204,12 +202,12 @@ const Home = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
-                className="card-glass p-8 rounded-2xl shadow-card"
+                className="card-elevated p-8"
               >
-                <div className="inline-flex p-3 rounded-xl bg-gradient-cloud/10 mb-4">
+                <div className="inline-flex p-3 rounded-xl bg-primary/10 mb-4">
                   <feature.icon className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
+                <h3 className="text-xl font-bold mb-3 text-foreground">{feature.title}</h3>
                 <p className="text-muted-foreground">{feature.description}</p>
               </motion.div>
             ))}
@@ -218,7 +216,7 @@ const Home = () => {
       </section>
 
       {/* Pricing Preview Section */}
-      <section className="py-24 px-4 bg-mesh">
+      <section className="py-24 px-4 bg-secondary/30">
         <div className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -227,8 +225,8 @@ const Home = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Simple, <span className="text-gradient">Transparent Pricing</span>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
+              Simple, <span className="text-primary">Transparent Pricing</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Choose the perfect VPS plan for your needs
@@ -244,34 +242,34 @@ const Home = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ y: -10 }}
-                className={`relative card-glass p-8 rounded-2xl shadow-card ${
+                className={`relative card-elevated p-8 ${
                   plan.popular ? 'ring-2 ring-primary' : ''
                 }`}
               >
                 {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-cloud text-primary-foreground text-sm font-semibold">
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-primary text-primary-foreground text-sm font-semibold">
                     Most Popular
                   </div>
                 )}
                 
-                <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
+                <h3 className="text-2xl font-bold mb-2 text-foreground">{plan.name}</h3>
                 <div className="mb-6">
-                  <span className="text-4xl font-bold text-gradient">{plan.price}</span>
+                  <span className="text-4xl font-bold text-primary">{plan.price}</span>
                   <span className="text-muted-foreground">{plan.period}</span>
                 </div>
 
                 <div className="space-y-3 mb-8">
                   <div className="flex items-center gap-2">
                     <FiServer className="text-primary" />
-                    <span className="font-medium">{plan.cpu}</span>
+                    <span className="font-medium text-foreground">{plan.cpu}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <FiZap className="text-primary" />
-                    <span className="font-medium">{plan.ram}</span>
+                    <span className="font-medium text-foreground">{plan.ram}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <FiServer className="text-primary" />
-                    <span className="font-medium">{plan.storage}</span>
+                    <span className="font-medium text-foreground">{plan.storage}</span>
                   </div>
                 </div>
 
@@ -290,8 +288,8 @@ const Home = () => {
                     whileTap={{ scale: 0.98 }}
                     className={`w-full px-6 py-3 rounded-xl font-semibold transition-colors ${
                       plan.popular
-                        ? 'bg-gradient-cloud text-primary-foreground glow'
-                        : 'border-2 border-border hover:bg-muted'
+                        ? 'bg-primary text-primary-foreground hover:bg-primary/90'
+                        : 'border-2 border-border hover:bg-secondary'
                     }`}
                   >
                     Configure
@@ -304,7 +302,7 @@ const Home = () => {
       </section>
 
       {/* Trust Section */}
-      <section className="py-16 px-4">
+      <section className="py-16 px-4 bg-background">
         <div className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -342,7 +340,7 @@ const Home = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="relative overflow-hidden rounded-3xl bg-gradient-cloud p-12 md:p-16 text-center"
+            className="relative overflow-hidden rounded-3xl bg-primary p-12 md:p-16 text-center"
           >
             <div className="relative z-10">
               <h2 className="text-4xl md:text-5xl font-bold text-primary-foreground mb-6">
@@ -353,9 +351,9 @@ const Home = () => {
               </p>
               <Link to="/register">
                 <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-10 py-4 text-lg font-semibold rounded-xl bg-background text-foreground hover:bg-background/90 transition-colors"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="px-10 py-4 text-lg font-semibold rounded-xl bg-background text-foreground hover:bg-secondary transition-colors"
                 >
                   Create Your Account
                 </motion.button>
