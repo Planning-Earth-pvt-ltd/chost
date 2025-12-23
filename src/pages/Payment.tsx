@@ -99,7 +99,7 @@ const Payment = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-mesh py-20 px-4">
+    <div className="min-h-screen py-20 px-4">
       <div className="container mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -107,7 +107,7 @@ const Payment = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <div className="inline-flex p-3 rounded-full bg-gradient-cloud/10 mb-4">
+          <div className="inline-flex p-3 rounded-full bg-primary/10 mb-4">
             <FiLock className="h-8 w-8 text-primary" />
           </div>
           <h1 className="text-5xl font-bold mb-4">
@@ -128,7 +128,7 @@ const Payment = () => {
           >
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Payment Method Selector */}
-              <div className="card-glass rounded-2xl p-6 space-y-6">
+              <div className="card-elevated rounded-2xl p-6 space-y-6">
                 <h2 className="text-2xl font-bold flex items-center gap-2">
                   <FiCreditCard className="h-6 w-6 text-primary" />
                   Payment Method
@@ -141,8 +141,8 @@ const Payment = () => {
                       whileHover={{ scale: 1.01 }}
                       className={`relative cursor-pointer rounded-xl border-2 p-4 transition-all ${
                         paymentMethod === "card"
-                          ? "border-primary bg-primary/5 glow"
-                          : "border-border/50 bg-card/30"
+                          ? "border-primary bg-primary/5 shadow-soft"
+                          : "border-border bg-background"
                       }`}
                       onClick={() => setPaymentMethod("card")}
                     >
@@ -160,8 +160,8 @@ const Payment = () => {
                       whileHover={{ scale: 1.01 }}
                       className={`relative cursor-pointer rounded-xl border-2 p-4 transition-all ${
                         paymentMethod === "upi"
-                          ? "border-primary bg-primary/5 glow"
-                          : "border-border/50 bg-card/30"
+                          ? "border-primary bg-primary/5 shadow-soft"
+                          : "border-border bg-background"
                       }`}
                       onClick={() => setPaymentMethod("upi")}
                     >
@@ -183,8 +183,8 @@ const Payment = () => {
                       whileHover={{ scale: 1.01 }}
                       className={`relative cursor-pointer rounded-xl border-2 p-4 transition-all ${
                         paymentMethod === "netbanking"
-                          ? "border-primary bg-primary/5 glow"
-                          : "border-border/50 bg-card/30"
+                          ? "border-primary bg-primary/5 shadow-soft"
+                          : "border-border bg-background"
                       }`}
                       onClick={() => setPaymentMethod("netbanking")}
                     >
@@ -202,8 +202,8 @@ const Payment = () => {
                       whileHover={{ scale: 1.01 }}
                       className={`relative cursor-pointer rounded-xl border-2 p-4 transition-all ${
                         paymentMethod === "emi"
-                          ? "border-primary bg-primary/5 glow"
-                          : "border-border/50 bg-card/30"
+                          ? "border-primary bg-primary/5 shadow-soft"
+                          : "border-border bg-background"
                       }`}
                       onClick={() => setPaymentMethod("emi")}
                     >
@@ -231,11 +231,11 @@ const Payment = () => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.3 }}
-                    className="card-glass rounded-2xl p-6 space-y-6"
+                    className="card-elevated rounded-2xl p-6 space-y-6"
                   >
                     {/* Animated Card Preview */}
                     <motion.div
-                      className="relative h-48 rounded-2xl bg-gradient-cloud p-6 text-primary-foreground overflow-hidden"
+                      className="relative h-48 rounded-2xl bg-primary p-6 text-primary-foreground overflow-hidden"
                       whileHover={{ scale: 1.02 }}
                       transition={{ type: "spring", stiffness: 300 }}
                     >
@@ -342,7 +342,7 @@ const Payment = () => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.3 }}
-                    className="card-glass rounded-2xl p-6 space-y-6"
+                    className="card-elevated rounded-2xl p-6 space-y-6"
                   >
                     <div className="flex items-center gap-3 mb-4">
                       <div className="flex gap-3">
@@ -389,7 +389,7 @@ const Payment = () => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.3 }}
-                    className="card-glass rounded-2xl p-6 space-y-6"
+                    className="card-elevated rounded-2xl p-6 space-y-6"
                   >
                     <div className="flex items-center gap-3 mb-4">
                       <div className="p-3 rounded-xl bg-primary/10">
@@ -432,7 +432,7 @@ const Payment = () => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.3 }}
-                    className="card-glass rounded-2xl p-6 space-y-6"
+                    className="card-elevated rounded-2xl p-6 space-y-6"
                   >
                     <div className="flex items-center gap-3 mb-4">
                       <div className="p-3 rounded-xl bg-accent/10">
@@ -449,7 +449,7 @@ const Payment = () => {
                         <motion.div
                           key={months}
                           whileHover={{ scale: 1.02 }}
-                          className="p-4 rounded-xl border border-border/50 bg-card/30 cursor-pointer hover:border-primary hover:bg-primary/5 transition-all"
+                          className="p-4 rounded-xl border border-border bg-background cursor-pointer hover:border-primary hover:bg-primary/5 transition-all"
                         >
                           <div className="flex justify-between items-center">
                             <div>
@@ -480,7 +480,7 @@ const Payment = () => {
 
               {/* Submit Button */}
               <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }}>
-                <Button type="submit" className="w-full py-6 text-lg font-semibold bg-gradient-cloud glow">
+                <Button type="submit" className="w-full py-6 text-lg font-semibold bg-primary shadow-soft">
                   <FiLock className="mr-2 h-5 w-5" />
                   Pay Now - ₹{price.toLocaleString("en-IN")}
                 </Button>
@@ -501,8 +501,8 @@ const Payment = () => {
             className="lg:col-span-1"
           >
             <div className="sticky top-24">
-              <div className="card-glass rounded-2xl p-6 shadow-card space-y-6">
-                <h2 className="text-2xl font-bold text-gradient">Order Summary</h2>
+              <div className="card-elevated rounded-2xl p-6 space-y-6">
+                <h2 className="text-2xl font-bold text-primary">Order Summary</h2>
 
                 <Separator />
 
@@ -560,7 +560,7 @@ const Payment = () => {
                 <Separator />
 
                 {/* Animated Total Price */}
-                <div className="p-6 rounded-xl bg-gradient-cloud/10 border border-primary/20">
+                <div className="p-6 rounded-xl bg-secondary/50">
                   <div className="flex justify-between items-end">
                     <div>
                       <div className="text-sm text-muted-foreground mb-1">Total Amount</div>
@@ -572,7 +572,7 @@ const Payment = () => {
                       initial={{ scale: 0.8, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
                       transition={{ duration: 0.5, delay: 0.5 }}
-                      className="text-4xl font-bold text-gradient"
+                      className="text-4xl font-bold text-primary"
                     >
                       ₹{animatedPrice.toLocaleString("en-IN")}
                     </motion.div>

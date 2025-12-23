@@ -90,12 +90,12 @@ const ConfigureVPS = () => {
             <div className="lg:col-span-2 space-y-6">
               {/* CPU Selector */}
               <motion.div
-                className="card-glass rounded-2xl p-6"
+                className="card-elevated rounded-2xl p-6"
                 whileHover={{ y: -2 }}
                 transition={{ duration: 0.2 }}
               >
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="p-2 rounded-lg bg-gradient-cloud/10">
+                  <div className="p-2 rounded-lg bg-primary/10">
                     <FiCpu className="h-5 w-5 text-primary" />
                   </div>
                   <h3 className="text-xl font-bold">CPU Cores</h3>
@@ -107,8 +107,8 @@ const ConfigureVPS = () => {
                         htmlFor={`cpu-${option.value}`}
                         className={`flex flex-col items-center justify-center p-4 rounded-xl border-2 cursor-pointer transition-all ${
                           cpu === option.value
-                            ? "border-primary bg-primary/10 glow"
-                            : "border-border hover:border-primary/50"
+                            ? "border-primary bg-primary/10 shadow-soft"
+                            : "border-border hover:border-primary/50 bg-background"
                         }`}
                       >
                         <RadioGroupItem value={option.value} id={`cpu-${option.value}`} className="sr-only" />
@@ -122,12 +122,12 @@ const ConfigureVPS = () => {
 
               {/* RAM Selector */}
               <motion.div
-                className="card-glass rounded-2xl p-6"
+                className="card-elevated rounded-2xl p-6"
                 whileHover={{ y: -2 }}
                 transition={{ duration: 0.2 }}
               >
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="p-2 rounded-lg bg-gradient-cloud/10">
+                  <div className="p-2 rounded-lg bg-primary/10">
                     <FiServer className="h-5 w-5 text-primary" />
                   </div>
                   <h3 className="text-xl font-bold">RAM</h3>
@@ -139,8 +139,8 @@ const ConfigureVPS = () => {
                         htmlFor={`ram-${option.value}`}
                         className={`flex flex-col items-center justify-center p-4 rounded-xl border-2 cursor-pointer transition-all ${
                           ram === option.value
-                            ? "border-primary bg-primary/10 glow"
-                            : "border-border hover:border-primary/50"
+                            ? "border-primary bg-primary/10 shadow-soft"
+                            : "border-border hover:border-primary/50 bg-background"
                         }`}
                       >
                         <RadioGroupItem value={option.value} id={`ram-${option.value}`} className="sr-only" />
@@ -154,12 +154,12 @@ const ConfigureVPS = () => {
 
               {/* Storage Slider */}
               <motion.div
-                className="card-glass rounded-2xl p-6"
+                className="card-elevated rounded-2xl p-6"
                 whileHover={{ y: -2 }}
                 transition={{ duration: 0.2 }}
               >
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="p-2 rounded-lg bg-gradient-cloud/10">
+                  <div className="p-2 rounded-lg bg-primary/10">
                     <FiHardDrive className="h-5 w-5 text-primary" />
                   </div>
                   <h3 className="text-xl font-bold">Storage</h3>
@@ -181,12 +181,12 @@ const ConfigureVPS = () => {
 
               {/* OS Selector */}
               <motion.div
-                className="card-glass rounded-2xl p-6"
+                className="card-elevated rounded-2xl p-6"
                 whileHover={{ y: -2 }}
                 transition={{ duration: 0.2 }}
               >
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="p-2 rounded-lg bg-gradient-cloud/10">
+                  <div className="p-2 rounded-lg bg-primary/10">
                     <FiServer className="h-5 w-5 text-primary" />
                   </div>
                   <h3 className="text-xl font-bold">Operating System</h3>
@@ -211,12 +211,12 @@ const ConfigureVPS = () => {
               {/* Backup Toggle & Billing Cycle */}
               <div className="grid md:grid-cols-2 gap-6">
                 <motion.div
-                  className="card-glass rounded-2xl p-6"
+                  className="card-elevated rounded-2xl p-6"
                   whileHover={{ y: -2 }}
                   transition={{ duration: 0.2 }}
                 >
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="p-2 rounded-lg bg-gradient-cloud/10">
+                    <div className="p-2 rounded-lg bg-primary/10">
                       <FiShield className="h-5 w-5 text-primary" />
                     </div>
                     <h3 className="text-lg font-bold">Backup</h3>
@@ -230,12 +230,12 @@ const ConfigureVPS = () => {
                 </motion.div>
 
                 <motion.div
-                  className="card-glass rounded-2xl p-6"
+                  className="card-elevated rounded-2xl p-6"
                   whileHover={{ y: -2 }}
                   transition={{ duration: 0.2 }}
                 >
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="p-2 rounded-lg bg-gradient-cloud/10">
+                    <div className="p-2 rounded-lg bg-primary/10">
                       <FiCalendar className="h-5 w-5 text-primary" />
                     </div>
                     <h3 className="text-lg font-bold">Billing Cycle</h3>
@@ -259,12 +259,12 @@ const ConfigureVPS = () => {
             {/* Right Panel - Summary Card */}
             <div className="lg:col-span-1">
               <motion.div
-                className="card-glass rounded-2xl p-6 sticky top-24"
+                className="card-elevated rounded-2xl p-6 sticky top-24"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                <h3 className="text-2xl font-bold mb-6 text-gradient">Configuration Summary</h3>
+                <h3 className="text-2xl font-bold mb-6 text-primary">Configuration Summary</h3>
 
                 <div className="space-y-4 mb-6">
                   <div className="flex items-center justify-between py-2 border-b border-border/50">
@@ -295,7 +295,7 @@ const ConfigureVPS = () => {
                   </div>
                 </div>
 
-                <div className="p-4 rounded-xl bg-gradient-cloud/10 mb-6">
+                <div className="p-4 rounded-xl bg-secondary/50 mb-6">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-muted-foreground">Total Price</span>
                     {billingCycle !== "monthly" && (
@@ -304,7 +304,7 @@ const ConfigureVPS = () => {
                       </span>
                     )}
                   </div>
-                  <div className="text-4xl font-bold text-gradient">
+                  <div className="text-4xl font-bold text-primary">
                     ₹{calculatePrice.toLocaleString()}
                     <span className="text-lg text-muted-foreground">
                       /{billingCycle === "monthly" ? "mo" : billingCycle === "6months" ? "6mo" : "yr"}
@@ -316,7 +316,7 @@ const ConfigureVPS = () => {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={handleContinue}
-                  className="w-full py-4 text-lg font-semibold rounded-xl bg-gradient-cloud text-primary-foreground glow flex items-center justify-center gap-2"
+                  className="w-full py-4 text-lg font-semibold rounded-xl bg-primary text-primary-foreground shadow-soft flex items-center justify-center gap-2"
                 >
                   <FiCheck className="h-5 w-5" />
                   Continue to Checkout

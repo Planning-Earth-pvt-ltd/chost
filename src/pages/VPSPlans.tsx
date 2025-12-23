@@ -99,7 +99,7 @@ const VPSPlans = () => {
           </p>
 
           {/* Billing Toggle */}
-          <div className="inline-flex items-center gap-2 p-2 rounded-xl bg-muted/30 backdrop-blur-sm">
+          <div className="inline-flex items-center gap-2 p-2 rounded-xl bg-secondary/50 shadow-soft">
             {[
               { value: "monthly" as const, label: "Monthly" },
               { value: "6months" as const, label: "6 Months" },
@@ -110,8 +110,8 @@ const VPSPlans = () => {
                 onClick={() => setBillingCycle(option.value)}
                 className={`relative px-6 py-3 rounded-lg font-medium transition-all ${
                   billingCycle === option.value
-                    ? "bg-gradient-cloud text-primary-foreground"
-                    : "text-muted-foreground hover:text-foreground"
+                    ? "bg-primary text-primary-foreground shadow-soft"
+                    : "text-muted-foreground hover:text-foreground hover:bg-secondary"
                 }`}
               >
                 {option.label}
@@ -136,16 +136,13 @@ const VPSPlans = () => {
               whileHover={{ y: -10, scale: 1.02 }}
               className="relative group"
             >
-              {/* Gradient Border Effect */}
-              <div className="absolute inset-0 bg-gradient-cloud rounded-2xl opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300" />
-              
               <div
-                className={`relative card-glass rounded-2xl p-8 shadow-card h-full flex flex-col ${
+                className={`relative card-elevated rounded-2xl p-8 h-full flex flex-col ${
                   plan.popular ? "ring-2 ring-primary" : ""
                 }`}
               >
                 {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-cloud text-primary-foreground text-sm font-semibold glow">
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-primary text-primary-foreground text-sm font-semibold shadow-soft">
                     Most Popular
                   </div>
                 )}
@@ -230,8 +227,8 @@ const VPSPlans = () => {
                     whileTap={{ scale: 0.98 }}
                     className={`w-full px-6 py-4 rounded-xl font-semibold transition-all ${
                       plan.popular
-                        ? "bg-gradient-cloud text-primary-foreground glow"
-                        : "border-2 border-border hover:bg-muted hover:border-primary"
+                        ? "bg-primary text-primary-foreground shadow-soft"
+                        : "border-2 border-border hover:bg-secondary hover:border-primary"
                     }`}
                   >
                     Configure Plan
