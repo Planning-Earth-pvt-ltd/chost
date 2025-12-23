@@ -131,20 +131,20 @@ const Confirmation = () => {
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-            className="inline-flex p-6 rounded-full bg-gradient-cloud/10 mb-8"
+            className="inline-flex p-6 rounded-full bg-accent/10 mb-8"
           >
             <FiCheckCircle className="h-20 w-20 text-accent" />
           </motion.div>
 
           <h1 className="text-5xl font-bold mb-4">
-            <span className="text-gradient">Success!</span>
+            <span className="text-primary">Success!</span>
           </h1>
           <p className="text-xl text-muted-foreground mb-8">
             Your VPS has been successfully created
           </p>
 
           {/* Details Card */}
-          <div className="card-glass rounded-2xl p-8 mb-8 text-left">
+          <div className="card-elevated rounded-2xl p-8 mb-8 text-left">
             <h2 className="text-2xl font-bold mb-6 text-center">Order Details</h2>
             
             <div className="space-y-4">
@@ -172,7 +172,7 @@ const Confirmation = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.6 }}
-            className="card-glass rounded-2xl p-8 mb-8"
+            className="card-elevated rounded-2xl p-8 mb-8"
           >
             <div className="flex items-center justify-center gap-3 mb-6">
               <div className="p-3 rounded-full bg-primary/10">
@@ -189,7 +189,7 @@ const Confirmation = () => {
               }}
               transition={{ duration: 0.5 }}
             >
-              <div className="text-6xl font-bold text-gradient mb-2">
+              <div className="text-6xl font-bold text-primary mb-2">
                 {formatTime(timeRemaining)}
               </div>
               <p className="text-sm text-muted-foreground">Estimated time remaining</p>
@@ -296,7 +296,7 @@ const Confirmation = () => {
           </motion.div>
 
           {/* Info Box */}
-          <div className="card-glass rounded-xl p-6 mb-8 flex items-start gap-4">
+          <div className="card-elevated rounded-xl p-6 mb-8 flex items-start gap-4">
             <FiMail className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
             <div className="text-left">
               <h3 className="font-semibold mb-1">Check Your Email</h3>
@@ -313,7 +313,7 @@ const Confirmation = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 text-lg font-semibold rounded-xl bg-gradient-cloud text-primary-foreground glow"
+                className="px-8 py-4 text-lg font-semibold rounded-xl bg-primary text-primary-foreground shadow-soft hover:shadow-elevated transition-all"
               >
                 Go to Dashboard
               </motion.button>

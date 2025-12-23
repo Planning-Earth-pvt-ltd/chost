@@ -36,7 +36,7 @@ const Dashboard = () => {
           {/* Header */}
           <div className="mb-12">
             <h1 className="text-5xl font-bold mb-4">
-              <span className="text-gradient">Dashboard</span>
+              <span className="text-primary">Dashboard</span>
             </h1>
             <p className="text-xl text-muted-foreground">
               Manage and monitor your VPS instances
@@ -56,14 +56,14 @@ const Dashboard = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="card-glass p-6 rounded-2xl"
+                className="card-elevated p-6 rounded-2xl"
               >
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm text-muted-foreground mb-1">{stat.label}</p>
                     <p className="text-3xl font-bold">{stat.value}</p>
                   </div>
-                  <div className={`p-3 rounded-xl bg-gradient-cloud/10`}>
+                  <div className="p-3 rounded-xl bg-primary/10">
                     <stat.icon className={`h-6 w-6 ${stat.color}`} />
                   </div>
                 </div>
@@ -81,7 +81,7 @@ const Dashboard = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="card-glass p-8 rounded-2xl"
+                className="card-elevated p-8 rounded-2xl"
               >
                 <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                   {/* Server Info */}
@@ -123,7 +123,7 @@ const Dashboard = () => {
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="p-3 rounded-xl bg-gradient-cloud/10 border border-primary/20 hover:bg-gradient-cloud/20 transition-colors"
+                      className="p-3 rounded-xl bg-primary/10 border border-primary/20 hover:bg-primary/20 transition-colors"
                     >
                       <FiPower className="h-5 w-5 text-primary" />
                     </motion.button>
