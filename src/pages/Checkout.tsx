@@ -103,12 +103,12 @@ const Checkout = () => {
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                   <motion.div
-                    className="card-glass rounded-2xl p-8"
+                    className="card-elevated rounded-2xl p-8"
                     whileHover={{ y: -2 }}
                     transition={{ duration: 0.2 }}
                   >
                     <div className="flex items-center gap-3 mb-6">
-                      <div className="p-2 rounded-lg bg-gradient-cloud/10">
+                      <div className="p-2 rounded-lg bg-primary/10">
                         <FiUser className="h-5 w-5 text-primary" />
                       </div>
                       <h2 className="text-2xl font-bold">Contact Information</h2>
@@ -187,12 +187,12 @@ const Checkout = () => {
                   </motion.div>
 
                   <motion.div
-                    className="card-glass rounded-2xl p-8"
+                    className="card-elevated rounded-2xl p-8"
                     whileHover={{ y: -2 }}
                     transition={{ duration: 0.2 }}
                   >
                     <div className="flex items-center gap-3 mb-6">
-                      <div className="p-2 rounded-lg bg-gradient-cloud/10">
+                      <div className="p-2 rounded-lg bg-primary/10">
                         <FiMapPin className="h-5 w-5 text-primary" />
                       </div>
                       <h2 className="text-2xl font-bold">Billing Address</h2>
@@ -297,7 +297,7 @@ const Checkout = () => {
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       type="submit"
-                      className="w-full py-4 text-lg font-semibold rounded-xl bg-gradient-cloud text-primary-foreground glow flex items-center justify-center gap-2"
+                      className="w-full py-4 text-lg font-semibold rounded-xl bg-primary text-primary-foreground shadow-soft flex items-center justify-center gap-2"
                     >
                       <FiCheck className="h-5 w-5" />
                       Proceed to Payment
@@ -310,12 +310,12 @@ const Checkout = () => {
             {/* Right Panel - Sticky Summary Card */}
             <div className="lg:col-span-1">
               <motion.div
-                className="card-glass rounded-2xl p-6 sticky top-24 shadow-2xl"
+                className="card-elevated rounded-2xl p-6 sticky top-24"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                <h3 className="text-2xl font-bold mb-6 text-gradient">Order Summary</h3>
+                <h3 className="text-2xl font-bold mb-6 text-primary">Order Summary</h3>
 
                 <div className="space-y-4 mb-6">
                   <div className="flex items-center justify-between py-2 border-b border-border/50">
@@ -348,11 +348,11 @@ const Checkout = () => {
                   </div>
                 </div>
 
-                <div className="p-4 rounded-xl bg-gradient-cloud/10 mb-6">
+                <div className="p-4 rounded-xl bg-secondary/50 mb-6">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm text-muted-foreground">Total Amount</span>
                   </div>
-                  <div className="text-4xl font-bold text-gradient">
+                  <div className="text-4xl font-bold text-primary">
                     ₹{price.toLocaleString()}
                     <span className="text-lg text-muted-foreground">
                       /{config.billingCycle === "monthly" ? "mo" : config.billingCycle === "6months" ? "6mo" : "yr"}
@@ -368,7 +368,7 @@ const Checkout = () => {
                     whileTap={{ scale: 0.98 }}
                     onClick={form.handleSubmit(onSubmit)}
                     type="button"
-                    className="w-full py-4 text-lg font-semibold rounded-xl bg-gradient-cloud text-primary-foreground glow flex items-center justify-center gap-2"
+                    className="w-full py-4 text-lg font-semibold rounded-xl bg-primary text-primary-foreground shadow-soft flex items-center justify-center gap-2"
                   >
                     <FiCheck className="h-5 w-5" />
                     Proceed to Payment
