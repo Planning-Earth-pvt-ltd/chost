@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { FiServer, FiCpu, FiHardDrive, FiActivity, FiPower, FiSettings } from "react-icons/fi";
+import { FileText, CreditCard, Settings, User } from "lucide-react";
 
 const Dashboard = () => {
   const servers = [
@@ -34,13 +36,33 @@ const Dashboard = () => {
           transition={{ duration: 0.6 }}
         >
           {/* Header */}
-          <div className="mb-12">
-            <h1 className="text-5xl font-bold mb-4">
-              <span className="text-primary">Dashboard</span>
-            </h1>
-            <p className="text-xl text-muted-foreground">
-              Manage and monitor your VPS instances
-            </p>
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-12">
+            <div>
+              <h1 className="text-5xl font-bold mb-4">
+                <span className="text-primary">Dashboard</span>
+              </h1>
+              <p className="text-xl text-muted-foreground">
+                Manage and monitor your VPS instances
+              </p>
+            </div>
+            
+            {/* Quick Links */}
+            <div className="flex flex-wrap gap-2">
+              <Link
+                to="/billing-history"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-card border border-border rounded-lg hover:bg-secondary/30 transition-colors text-sm font-medium"
+              >
+                <FileText className="w-4 h-4" />
+                Billing History
+              </Link>
+              <Link
+                to="/vps-plans"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors text-sm font-medium"
+              >
+                <CreditCard className="w-4 h-4" />
+                Add Server
+              </Link>
+            </div>
           </div>
 
           {/* Stats Overview */}
