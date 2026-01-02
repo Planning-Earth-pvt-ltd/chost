@@ -13,6 +13,7 @@ import Confirmation from "./pages/Confirmation";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
+import BillingHistory from "./pages/BillingHistory";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +35,7 @@ const App = () => (
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/billing-history" element={<BillingHistory />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>
